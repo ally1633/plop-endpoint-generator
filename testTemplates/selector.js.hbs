@@ -1,0 +1,39 @@
+import {
+    makeSelect{{pluralizeHighFirstLetter modelName}},
+    makeSelect{{uppercaseFirstLetter modelName}}ById,
+    makeSelectError,
+    makeSelectLoading,
+} from '../{{modelName}}';
+
+describe('Main selectors for {{modelName}}', () => {
+    test('should select {{pluralizeLow modelName}}', () => {
+        const mockedState = {
+            {{modelName}}:{
+                {{pluralizeLow modelName}}: [{id:1,value:'test'}],
+            }
+        };
+        expect(makeSelect{{pluralizeHighFirstLetter modelName}}()(mockedState)).toEqual(mockedState.{{modelName}}.{{pluralizeLow modelName}});
+    });
+    test('should select one specific {{modelName}}', () => {
+        const mockedState = {
+            {{modelName}}:{
+                {{pluralizeLow modelName}}: [{id:1,value:'test'}],
+            }
+        };
+        expect(makeSelect{{uppercaseFirstLetter modelName}}ById(1)(mockedState)).toEqual(mockedState.{{modelName}}.{{pluralizeLow modelName}}[0]);
+    });
+    test('should select loading', () => {
+        const mockedState = {
+            {{modelName}}: {loading: true},
+        };
+        expect(makeSelectLoading()(mockedState)).toEqual(true);
+        expect(makeSelectLoading()({})).toEqual(false);
+    });
+    test('should select error', () => {
+        const mockedState = {
+        {{modelName}}: {error: true},
+        };
+        expect(makeSelectError()(mockedState)).toEqual(true);
+        expect(makeSelectError()({})).toEqual(false);
+    });
+});

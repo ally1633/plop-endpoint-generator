@@ -1,0 +1,87 @@
+import {select, call, put, all, takeLatest} from 'redux-saga/effects';
+import {
+{{#if (shouldRender all get)}}
+    get{{pluralizeHighFirstLetter modelName}}Success,
+    get{{pluralizeHighFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all post)}}
+    create{{uppercaseFirstLetter modelName}}Success,
+    create{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all put)}}
+    update{{uppercaseFirstLetter modelName}}Success,
+    update{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all delete)}}
+    delete{{uppercaseFirstLetter modelName}}Success,
+    delete{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+} from '../actions/{{modelName}}';
+import api from '../api';
+import actionTypes from './../constants/actionTypes';
+
+export const {{uppersnakecase modelName}}_SAGA_KEY = '{{modelName}}';
+
+
+{{#if (shouldRender all get)}}
+export const get{{pluralizeHighFirstLetter modelName}} = function*({params}) {
+    try {
+        const {{{pluralize modelName}}} = yield call(api.get{{pluralizeHighFirstLetter modelName}}, params);
+        yield put(get{{pluralizeHighFirstLetter modelName}}Success({{pluralize modelName}}.data));
+    } catch (err) {
+        yield put(get{{pluralizeHighFirstLetter modelName}}Error(err));
+    }
+};
+{{/if}}
+
+{{#if (shouldRender all post)}}
+export const post{{uppercaseFirstLetter modelName}} = function*(data) {
+    try {
+        const {{modelName}} = yield call(api.create{{uppercaseFirstLetter modelName}}, data.data);
+        yield put(create{{uppercaseFirstLetter modelName}}Success({{modelName}}));
+    } catch (err) {
+        yield put(create{{uppercaseFirstLetter modelName}}Error(err));
+    }
+};
+{{/if}}
+
+{{#if (shouldRender all put)}}
+export const put{{uppercaseFirstLetter modelName}} = function*(data) {
+    try {
+        const {{modelName}} = yield call(api.update{{uppercaseFirstLetter modelName}}, data.data);
+        yield put(update{{uppercaseFirstLetter modelName}}Success({{modelName}}));
+
+    } catch (err) {
+        yield put(update{{uppercaseFirstLetter modelName}}Error(err));
+    }
+};
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+export const delete{{uppercaseFirstLetter modelName}} = function*(data) {
+    try {
+        yield call(api.delete{{uppercaseFirstLetter modelName}}, data.data.id);
+        yield put(delete{{uppercaseFirstLetter modelName}}Success(data.data));
+
+    } catch (err) {
+        yield put(delete{{uppercaseFirstLetter modelName}}Error(err));
+    }
+};
+{{/if}}
+
+export default function* root() {
+    yield all([
+{{#if (shouldRender all get)}}
+        takeLatest(actionTypes.GET_{{ pluralizeHigh modelName}}, get{{pluralizeHighFirstLetter modelName}}),
+{{/if}}
+{{#if (shouldRender all post)}}
+        takeLatest(actionTypes.CREATE_{{uppercase modelName}}, post{{uppercaseFirstLetter modelName}}),
+{{/if}}
+{{#if (shouldRender all put)}}
+        takeLatest(actionTypes.UPDATE_{{uppercase modelName}}, put{{uppercaseFirstLetter modelName}}),
+{{/if}}
+{{#if (shouldRender all delete)}}
+        takeLatest(actionTypes.DELETE_{{uppercase modelName}}, delete{{uppercaseFirstLetter modelName}}),
+{{/if}}
+    ]);
+}

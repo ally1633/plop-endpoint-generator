@@ -1,0 +1,86 @@
+import produce from 'immer';
+import actionTypes from './../constants/actionTypes';
+import {findIndex} from 'lodash';
+
+// The initial state of the {{modelName}} reducer
+export const initialState = {
+    loading: false,
+    error: false,
+    {{pluralize modelName}}: [],
+};
+
+/* eslint-disable default-case, no-param-reassign */
+const {{modelName}}Reducer = (state = initialState, action) =>
+    produce(state, draft => {
+        switch (action.type) {
+            {{#if (shouldRender all get)}}
+            case actionTypes.GET_{{ pluralizeHigh modelName}}:
+            {{/if}}
+            {{#if (shouldRender all post)}}
+            case actionTypes.CREATE_{{uppercase modelName}}:
+            {{/if}}
+            {{#if (shouldRender all put)}}
+            case actionTypes.UPDATE_{{uppercase modelName}}:
+            {{/if}}
+            {{#if (shouldRender all delete)}}
+            case actionTypes.DELETE_{{uppercase modelName}}:
+                draft.loading = true;
+                draft.error = false;
+                break;
+            {{/if}}
+            {{#if (shouldRender all get)}}
+            case actionTypes.GET_{{ pluralizeHigh modelName}}_SUCCESS:
+                draft.loading = false;
+                draft.{{pluralize modelName}} = action.data;
+                break;
+            {{/if}}
+            {{#if (shouldRender all post)}}
+            case actionTypes.CREATE_{{uppercase modelName}}_SUCCESS:
+                draft.loading = false;
+                draft.{{pluralize modelName}}.push(action.data);
+            break;
+            {{/if}}
+            {{#if (shouldRender all put)}}
+            case actionTypes.UPDATE_{{uppercase modelName}}_SUCCESS:
+                draft.loading = false;
+                // eslint-disable-next-line no-case-declarations
+                const index = findIndex(draft.{{pluralize modelName}}, {id: action.data.id});
+                draft.{{pluralize modelName}}[index] = action.data
+                break;
+            {{/if}}
+            {{#if (shouldRender all delete)}}
+            case actionTypes.DELETE_{{uppercase modelName}}_SUCCESS:
+                draft.loading = false;
+                // eslint-disable-next-line no-case-declarations
+                const index2 = findIndex(draft.{{pluralize modelName}}, {id: action.data.id});
+                draft.{{pluralize modelName}}.splice(index2, 1);
+                break;
+            {{/if}}
+            {{#if (shouldRender all get)}}
+            case actionTypes.GET_{{ pluralizeHigh modelName}}_ERROR:
+            {{/if}}
+            {{#if (shouldRender all post)}}
+            case actionTypes.CREATE_{{uppercase modelName}}_ERROR:
+            {{/if}}
+            {{#if (shouldRender all put)}}
+            case actionTypes.UPDATE_{{uppercase modelName}}_ERROR:
+            {{/if}}
+            {{#if (shouldRender all delete)}}
+            case actionTypes.DELETE_{{uppercase modelName}}_ERROR:
+                draft.error = action.error;
+                draft.loading = false;
+                break;
+            {{/if}}
+            case actionTypes.CLEAR_ERROR:
+				draft.loading = false;
+				draft.error = false;
+				break;
+			case actionTypes.CLEAR_REDUCER:
+                draft.{{pluralize modelName}} = [];
+                draft.loading = false;
+                draft.error = false;
+                break;
+    }
+});
+
+export default {{modelName}}Reducer;

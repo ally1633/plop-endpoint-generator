@@ -1,0 +1,138 @@
+import actionTypes from '../../constants/actionTypes';
+import {actionHelper} from '../../../internals/testing/helpers/actionHelper';
+import * as {{modelName}} from '../{{modelName}}';
+
+{{#if (shouldRender all get)}}
+describe('action GET_{{pluralizeHigh modelName}}', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.GET_{{pluralizeHigh modelName}});
+        const expectedResponse = {
+            type: actionTypes.GET_{{pluralizeHigh modelName}},
+        };
+    expect({{modelName}}.get{{pluralizeHighFirstLetter modelName}}()).toEqual(expectedResponse);
+    });
+});
+describe('action GET_{{pluralizeHigh modelName}}_SUCCESS', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.GET_{{pluralizeHigh modelName}}_SUCCESS);
+        const expectedResponse = {
+            type: actionTypes.GET_{{pluralizeHigh modelName}}_SUCCESS,
+            data: [],
+        };
+        expect({{modelName}}.get{{pluralizeHighFirstLetter modelName}}Success([])).toEqual(expectedResponse);
+    });
+});
+
+describe('action GET_{{pluralizeHigh modelName}}_ERROR', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.GET_{{pluralizeHigh modelName}}_ERROR);
+        const expectedResponse = {
+            type: actionTypes.GET_{{pluralizeHigh modelName}}_ERROR,
+            error: {},
+        };
+        expect({{modelName}}.get{{pluralizeHighFirstLetter modelName}}Error({})).toEqual(expectedResponse);
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all post)}}
+describe('action CREATE_{{uppercase modelName}}', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.CREATE_{{uppercase modelName}});
+        const expectedResponse = {
+            type: actionTypes.CREATE_{{uppercase modelName}},
+            data : {}
+        };
+        expect({{modelName}}.create{{uppercaseFirstLetter modelName}}({})).toEqual(expectedResponse);
+    });
+});
+describe('action CREATE_{{uppercase modelName}}_SUCCESS', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.CREATE_{{uppercase modelName}}_SUCCESS);
+        const expectedResponse = {
+            type: actionTypes.CREATE_{{uppercase modelName}}_SUCCESS,
+            data: {},
+        };
+        expect({{modelName}}.create{{uppercaseFirstLetter modelName}}Success({})).toEqual(expectedResponse);
+    });
+});
+
+describe('action CREATE_{{uppercase modelName}}_ERROR', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.CREATE_{{uppercase modelName}}_ERROR);
+        const expectedResponse = {
+            type: actionTypes.CREATE_{{uppercase modelName}}_ERROR,
+            error: {},
+        };
+        expect({{modelName}}.create{{uppercaseFirstLetter modelName}}Error({})).toEqual(expectedResponse);
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all put)}}
+describe('action UPDATE_{{uppercase modelName}}', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.UPDATE_{{uppercase modelName}});
+            const expectedResponse = {
+            type: actionTypes.UPDATE_{{uppercase modelName}},
+            data: {},
+        };
+        expect({{modelName}}.update{{uppercaseFirstLetter modelName}}({})).toEqual(expectedResponse);
+    });
+});
+describe('action UPDATE_{{uppercase modelName}}_SUCCESS', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.UPDATE_{{uppercase modelName}}_SUCCESS);
+        const expectedResponse = {
+            type: actionTypes.UPDATE_{{uppercase modelName}}_SUCCESS,
+            data: {},
+        };
+        expect({{modelName}}.update{{uppercaseFirstLetter modelName}}Success({})).toEqual(expectedResponse);
+    });
+});
+
+describe('action UPDATE_{{uppercase modelName}}_ERROR', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.UPDATE_{{uppercase modelName}}_ERROR);
+        const expectedResponse = {
+            type: actionTypes.UPDATE_{{uppercase modelName}}_ERROR,
+            error: {},
+        };
+        expect({{modelName}}.update{{uppercaseFirstLetter modelName}}Error({})).toEqual(expectedResponse);
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+describe('action DELETE_{{uppercase modelName}}', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.DELETE_{{uppercase modelName}});
+        const expectedResponse = {
+            type: actionTypes.DELETE_{{uppercase modelName}},
+            id:1,
+        };
+        expect({{modelName}}.delete{{uppercaseFirstLetter modelName}}(1)).toEqual(expectedResponse);
+    });
+});
+describe('action DELETE_{{uppercase modelName}}_SUCCESS', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.DELETE_{{uppercase modelName}}_SUCCESS);
+        const expectedResponse = {
+            type: actionTypes.DELETE_{{uppercase modelName}}_SUCCESS,
+            id: 1,
+        };
+        expect({{modelName}}.delete{{uppercaseFirstLetter modelName}}Success(1)).toEqual(expectedResponse);
+    });
+});
+
+describe('action DELETE_{{uppercase modelName}}_ERROR', () => {
+    test('Sanity check', () => {
+        actionHelper.actionTypeExists(actionTypes.DELETE_{{uppercase modelName}}_ERROR);
+        const expectedResponse = {
+            type: actionTypes.DELETE_{{uppercase modelName}}_ERROR,
+            error: {},
+        };
+        expect({{modelName}}.delete{{uppercaseFirstLetter modelName}}Error({})).toEqual(expectedResponse);
+    });
+});
+{{/if}}

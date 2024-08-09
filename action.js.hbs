@@ -1,0 +1,185 @@
+import actionTypes from './../constants/actionTypes';
+{{#if (shouldRender all get)}}
+/**
+* GET
+*/
+
+/**
+* Get all {{pluralize modelName}}
+* @return {object} An action object with a type of GET_{{ pluralizeHigh modelName}}
+*/
+export const get{{pluralizeHighFirstLetter modelName}} = params => {
+    return {
+        type: actionTypes.GET_{{ pluralizeHigh modelName}},
+        params,
+    };
+};
+
+
+/**
+* Dispatched when the {{modelName}} is loaded by the request saga
+*
+* @param  {object} data
+*
+* @return {object} An action object with a type of GET_{{ pluralizeHigh modelName}}_SUCCESS passing the repos
+*/
+export const get{{pluralizeHighFirstLetter modelName}}Success = data => {
+    return {
+        type: actionTypes.GET_{{ pluralizeHigh modelName}}_SUCCESS,
+        data,
+    };
+};
+
+/**
+* Dispatched when loading the {{pluralize modelName}} fails
+*
+* @param  {object} error The error
+*
+* @return {object} An action object with a type of GET_{{ pluralizeHigh modelName}}_ERROR passing the error
+*/
+export const get{{pluralizeHighFirstLetter modelName}}Error = error => {
+    return {
+        type: actionTypes.GET_{{ pluralizeHigh modelName}}_ERROR,
+        error,
+    };
+};
+{{/if}}
+
+{{#if (shouldRender all post)}}
+/**
+* CREATE
+*/
+
+/**
+* Create a {{modelName}}
+* @param  {object} data
+* @return {object} An action object with a type of CREATE_{{uppercase modelName}}
+*/
+export const create{{uppercaseFirstLetter modelName}} = data => {
+    return {
+        type: actionTypes.CREATE_{{uppercase modelName}},
+        data,
+    };
+};
+
+/**
+* Dispatched when the {{modelName}} is created by the request saga
+*
+* @param  {object} data
+*
+* @return {object} An action object with a type of CREATE_{{uppercase modelName}}_SUCCESS passing the repos
+*/
+export const create{{uppercaseFirstLetter modelName}}Success = data => {
+    return {
+        type: actionTypes.CREATE_{{uppercase modelName}}_SUCCESS,
+        data,
+    };
+};
+
+/**
+* Dispatched when creating the {{modelName}} fails
+*
+* @param  {object} error The error
+*
+* @return {object} An action object with a type of CREATE_{{uppercase modelName}}_ERROR passing the error
+*/
+export const create{{uppercaseFirstLetter modelName}}Error = error => {
+    return {
+        type: actionTypes.CREATE_{{uppercase modelName}}_ERROR,
+        error,
+    };
+};
+{{/if}}
+
+{{#if (shouldRender all put)}}
+/**
+* UPDATE
+*/
+
+/**
+* Update a {{modelName}}
+* @param  {string} id
+* @param  {object} data
+* @return {object} An action object with a type of UPDATE_{{uppercase modelName}}
+*/
+export const update{{uppercaseFirstLetter modelName}} = data => {
+    return {
+        type: actionTypes.UPDATE_{{uppercase modelName}},
+        data,
+    };
+};
+
+/**
+* Dispatched when the {{modelName}} is updated by the request saga
+*
+* @param  {object} data
+*
+* @return {object} An action object with a type of UPDATE_{{uppercase modelName}}_SUCCESS passing the repos
+*/
+export const update{{uppercaseFirstLetter modelName}}Success = data => {
+    return {
+        type: actionTypes.UPDATE_{{uppercase modelName}}_SUCCESS,
+        data,
+    };
+};
+
+/**
+* Dispatched when updating the {{modelName}} fails
+*
+* @param  {object} error The error
+*
+* @return {object} An action object with a type of UPDATE_{{uppercase modelName}}_ERROR passing the error
+*/
+export const update{{uppercaseFirstLetter modelName}}Error = error => {
+    return {
+        type: actionTypes.UPDATE_{{uppercase modelName}}_ERROR,
+        error,
+    };
+};
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+/**
+* DELETE
+*/
+
+/**
+* Delete a {{modelName}}
+ * @param  {object} data
+* @return {object} An action object with a type of DELETE_{{uppercase modelName}}
+*/
+export const delete{{uppercaseFirstLetter modelName}} = data => {
+    return {
+        type: actionTypes.DELETE_{{uppercase modelName}},
+        data,
+    };
+};
+
+/**
+* Dispatched when the {{modelName}} is deleted by the request saga
+*
+ * @param  {object} data
+*
+* @return {object} An action object with a type of DELETE_{{uppercase modelName}}_SUCCESS passing the repos
+*/
+export const delete{{uppercaseFirstLetter modelName}}Success = data => {
+    return {
+        type: actionTypes.DELETE_{{uppercase modelName}}_SUCCESS,
+        data,
+    };
+};
+
+/**
+* Dispatched when deleting the {{modelName}} fails
+*
+* @param  {object} error The error
+*
+* @return {object} An action object with a type of DELETE_{{uppercase modelName}}_ERROR passing the error
+*/
+export const delete{{uppercaseFirstLetter modelName}}Error = error => {
+    return {
+        type: actionTypes.DELETE_{{uppercase modelName}}_ERROR,
+        error,
+    };
+};
+{{/if}}

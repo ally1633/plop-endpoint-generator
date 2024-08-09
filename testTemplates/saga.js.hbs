@@ -1,0 +1,203 @@
+import {runSaga} from 'redux-saga';
+import {
+    get{{pluralizeHighFirstLetter modelName}},
+    post{{uppercaseFirstLetter modelName}},
+    put{{uppercaseFirstLetter modelName}},
+    delete{{uppercaseFirstLetter modelName}},
+} from '../{{modelName}}';
+import api from './../../api';
+import {
+{{#if (shouldRender all get)}}
+    get{{pluralizeHighFirstLetter modelName}}Success,
+    get{{pluralizeHighFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all post)}}
+    create{{uppercaseFirstLetter modelName}}Success,
+    create{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all put)}}
+    update{{uppercaseFirstLetter modelName}}Success,
+    update{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+{{#if (shouldRender all delete)}}
+    delete{{uppercaseFirstLetter modelName}}Success,
+    delete{{uppercaseFirstLetter modelName}}Error,
+{{/if}}
+} from '../../actions/{{modelName}}';
+
+{{#if (shouldRender all get)}}
+describe('Call get endpoint {{modelName}}', () => {
+    test('should call api and dispatch success action', async () => {
+        const get{{pluralizeHighFirstLetter modelName}}Mock = jest
+            .spyOn(api, 'get{{pluralizeHighFirstLetter modelName}}')
+            .mockImplementation(() => Promise.resolve({data: []}));
+
+        const dispatched = [];
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action),
+            },
+            get{{pluralizeHighFirstLetter modelName}},
+            {data: []}
+        );
+
+        expect(get{{pluralizeHighFirstLetter modelName}}Mock).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([get{{pluralizeHighFirstLetter modelName}}Success([])]);
+        get{{pluralizeHighFirstLetter modelName}}Mock.mockClear();
+    });
+
+    test('should call api and dispatch error action', async () => {
+        const get{{pluralizeHighFirstLetter modelName}}Mock = jest
+            .spyOn(api, 'get{{pluralizeHighFirstLetter modelName}}')
+            .mockImplementation(() => Promise.reject({}));
+            //inside the reject is the value of error
+
+        const dispatched = [];
+        //run saga
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action),
+            },
+            get{{pluralizeHighFirstLetter modelName}},
+            {}
+        );
+
+        expect(get{{pluralizeHighFirstLetter modelName}}Mock).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([get{{pluralizeHighFirstLetter modelName}}Error({})]);
+        get{{pluralizeHighFirstLetter modelName}}Mock.mockClear();
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all post)}}
+describe('Call create endpoint {{modelName}}', () => {
+    test('should call api and dispatch success action', async () => {
+        const create{{uppercaseFirstLetter modelName}} = jest
+            .spyOn(api, 'create{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.resolve({data: {id: 1}}));
+
+        const dispatched = [];
+        await runSaga(
+        {
+            dispatch: (action) => dispatched.push(action),
+            },
+            post{{uppercaseFirstLetter modelName}},
+            {data: {id: 1}}
+        );
+
+        expect(create{{uppercaseFirstLetter modelName}}).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([create{{uppercaseFirstLetter modelName}}Success({id:1})]);
+        create{{uppercaseFirstLetter modelName}}.mockClear();
+    });
+
+    test('should call api and dispatch error action', async () => {
+        const create{{uppercaseFirstLetter modelName}} = jest
+            .spyOn(api, 'create{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.reject({}));
+            //inside the reject is the value of error
+
+        const dispatched = [];
+        //run saga
+        await runSaga(
+            {
+            dispatch: (action) => dispatched.push(action),
+            },
+            post{{uppercaseFirstLetter modelName}},
+            {data: {id: 1}}
+        );
+
+        expect(create{{uppercaseFirstLetter modelName}}).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([create{{uppercaseFirstLetter modelName}}Error({})]);
+        create{{uppercaseFirstLetter modelName}}.mockClear();
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all put)}}
+describe('Call update endpoint {{modelName}}', () => {
+    test('should call api and dispatch success action', async () => {
+        const update{{uppercaseFirstLetter modelName}} = jest
+            .spyOn(api, 'update{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.resolve({data: {id: 1,name: 'test'}}));
+
+        const dispatched = [];
+        await runSaga(
+        {
+            dispatch: (action) => dispatched.push(action),
+            },
+            put{{uppercaseFirstLetter modelName}},
+            {data: {id: 1,name: 'test'}}
+        );
+
+        expect(update{{uppercaseFirstLetter modelName}}).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([update{{uppercaseFirstLetter modelName}}Success({id: 1,name: 'test'})]);
+        update{{uppercaseFirstLetter modelName}}.mockClear();
+    });
+
+    test('should call api and dispatch error action', async () => {
+        const update{{uppercaseFirstLetter modelName}} = jest
+            .spyOn(api, 'update{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.reject({}));
+            //inside the reject is the value of error
+
+        const dispatched = [];
+        //run saga
+        await runSaga(
+            {
+            dispatch: (action) => dispatched.push(action),
+            },
+            put{{uppercaseFirstLetter modelName}},
+            {data: {id: 1,name: 'test'}}
+        );
+
+        expect(update{{uppercaseFirstLetter modelName}}).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([update{{uppercaseFirstLetter modelName}}Error({})]);
+        update{{uppercaseFirstLetter modelName}}.mockClear();
+    });
+});
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+describe('Call delete endpoint {{modelName}}', () => {
+    test('should call api and dispatch success action', async () => {
+        const delete{{uppercaseFirstLetter modelName}}Mock = jest
+            .spyOn(api, 'delete{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.resolve(1));
+
+        const dispatched = [];
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action),
+            },
+            delete{{uppercaseFirstLetter modelName}},
+            {data: {id: 1}}
+        );
+
+        expect(delete{{uppercaseFirstLetter modelName}})Mock.toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([delete{{uppercaseFirstLetter modelName}}Success({id: 1})]);
+        delete{{uppercaseFirstLetter modelName}}Mock.mockClear();
+    });
+
+    test('should call api and dispatch error action', async () => {
+        const delete{{uppercaseFirstLetter modelName}}Mock = jest
+            .spyOn(api, 'delete{{uppercaseFirstLetter modelName}}')
+            .mockImplementation(() => Promise.reject({}));
+            //inside the reject is the value of error
+
+        const dispatched = [];
+        //run saga
+        await runSaga(
+            {
+                dispatch: (action) => dispatched.push(action),
+            },
+            delete{{uppercaseFirstLetter modelName}},
+            {data: {id: 1}}
+        );
+
+        expect(delete{{uppercaseFirstLetter modelName}}Mock).toHaveBeenCalled();
+        expect(dispatched).toStrictEqual([delete{{uppercaseFirstLetter modelName}}Error({})]);
+        delete{{uppercaseFirstLetter modelName}}Mock.mockClear();
+    });
+});
+{{/if}}
+

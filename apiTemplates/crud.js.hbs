@@ -1,0 +1,45 @@
+import {get, post, put, remove} from '../api';
+
+{{#if (shouldRender all get)}}
+/**
+ * Fetch all {{pluralize modelName}} based on params
+ *
+ * @param {object} params
+ */
+export const get{{pluralizeHighFirstLetter modelName}} = (params = {}) => {
+	return get(`{{pluralize modelName}}`, params);
+};
+{{/if}}
+
+{{#if (shouldRender all post)}}
+/**
+* Request that a {{modelName}} is created
+*
+* @param {object} data
+*/
+export const create{{uppercaseFirstLetter modelName}} = data => {
+    return post('{{pluralize modelName}}', data);
+};
+{{/if}}
+
+{{#if (shouldRender all put)}}
+/**
+ * Update the data for a specific {{modelName}}
+ *
+ * @param {object} data  {{modelName}}'s data
+ */
+export const update{{uppercaseFirstLetter modelName}} = (data) => {
+	return put(`{{pluralize modelName}}/${data.id}`, data);
+};
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+/**
+* Delete a specific {{modelName}}
+*
+* @param {string} id {{modelName}}'s id
+*/
+export const delete{{uppercaseFirstLetter modelName}} = id => {
+    return remove(`{{pluralize modelName}}/${id}`);
+};
+{{/if}}

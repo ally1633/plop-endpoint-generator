@@ -1,0 +1,167 @@
+import actionTypes from '../../constants/actionTypes';
+import {{modelName}}Reducer, {initialState} from '../{{modelName}}';
+
+describe('{{modelName}} Reducer', () => {
+{{#if (shouldRender all get)}}
+    test('Should return default state', () => {
+        const newState = {{modelName}}Reducer(undefined, {});
+        expect(newState).toEqual(initialState);
+    });
+    test('Should return new state for GET_{{pluralizeHigh modelName}}', () => {
+        const expectedState = {
+            ...initialState,
+            loading: true,
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.GET_{{pluralizeHigh modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for GET_{{pluralizeHigh modelName}}_SUCCESS', () => {
+        const expectedState = {
+            ...initialState,
+            {{pluralizeLow modelName}}: []
+        };
+
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.GET_{{pluralizeHigh modelName}}_SUCCESS,
+            data: expectedState.{{pluralizeLow modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for GET_{{pluralizeHigh modelName}}_ERROR', () => {
+        const expectedState = {
+            ...initialState,
+            error: {},
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.GET_{{pluralizeHigh modelName}}_ERROR,
+            error: expectedState.error,
+        });
+        expect(newState).toEqual(expectedState);
+    });
+{{/if}}
+
+{{#if (shouldRender all post)}}
+    test('Should return default state', () => {
+        const newState = {{modelName}}Reducer(undefined, {});
+        expect(newState).toEqual(initialState);
+    });
+    test('Should return new state for CREATE_{{uppercase modelName}}', () => {
+        const expectedState = {
+            ...initialState,
+            loading: true,
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.CREATE_{{uppercase modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for CREATE_{{uppercase modelName}}_SUCCESS', () => {
+        const expectedState = {
+            ...initialState,
+            {{pluralizeLow modelName}}: [{}]
+        };
+
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.CREATE_{{uppercase modelName}}_SUCCESS,
+            data: {},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for CREATE_{{uppercase modelName}}_ERROR', () => {
+        const expectedState = {
+            ...initialState,
+            error: {},
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.CREATE_{{uppercase modelName}}_ERROR,
+            error: expectedState.error,
+        });
+        expect(newState).toEqual(expectedState);
+    });
+{{/if}}
+{{#if (shouldRender all put)}}
+    test('Should return default state', () => {
+        const newState = {{modelName}}Reducer(undefined, {});
+        expect(newState).toEqual(initialState);
+    });
+    test('Should return new state for UPDATE_{{uppercase modelName}}', () => {
+        const expectedState = {
+            ...initialState,
+            loading: true,
+        };
+
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.UPDATE_{{uppercase modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for UPDATE_{{uppercase modelName}}_SUCCESS', () => {
+        const expectedState = {
+            ...initialState,
+            {{pluralizeLow modelName}}: [{id: 1, name: 'after update'}]
+        };
+        const stateAfterCreate = activityReducer(undefined, {
+            type: actionTypes.CREATE_{{uppercase modelName}}_SUCCESS,
+            data: {id: 1, name: 'initial'},
+        });
+        const newState = {{modelName}}Reducer(stateAfterCreate, {
+            type: actionTypes.UPDATE_{{uppercase modelName}}_SUCCESS,
+            data: {id: 1, name: 'after update'},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for UPDATE_{{uppercase modelName}}_ERROR', () => {
+        const expectedState = {
+            ...initialState,
+            error: {},
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.UPDATE_{{uppercase modelName}}_ERROR,
+            error: expectedState.error,
+        });
+        expect(newState).toEqual(expectedState);
+    });
+{{/if}}
+
+{{#if (shouldRender all delete)}}
+    test('Should return default state', () => {
+        const newState = {{modelName}}Reducer(undefined, {});
+        expect(newState).toEqual(initialState);
+    });
+    test('Should return new state for DELETE_{{uppercase modelName}}', () => {
+        const expectedState = {
+            ...initialState,
+            loading: true,
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+            type: actionTypes.DELETE_{{uppercase modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for DELETE_{{uppercase modelName}}_SUCCESS', () => {
+        const expectedState = {
+            ...initialState,
+            {{pluralizeLow modelName}}: []
+        };
+
+        const newState = {{modelName}}Reducer(undefined, {
+        type: actionTypes.DELETE_{{uppercase modelName}}_SUCCESS,
+            data: expectedState.{{pluralizeLow modelName}},
+        });
+        expect(newState).toEqual(expectedState);
+    });
+    test('Should return new state for DELETE_{{uppercase modelName}}_ERROR', () => {
+        const expectedState = {
+            ...initialState,
+            error: {},
+        };
+        const newState = {{modelName}}Reducer(undefined, {
+        type: actionTypes.DELETE_{{uppercase modelName}}_ERROR,
+            error: expectedState.error,
+        });
+        expect(newState).toEqual(expectedState);
+    });
+{{/if}}
+});

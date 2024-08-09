@@ -1,0 +1,40 @@
+import {createSelector} from 'reselect';
+import {initialState} from '../reducers/{{modelName}}';
+import {findIndex} from 'lodash';
+const select{{uppercaseFirstLetter modelName}}State = state => state.{{modelName}} || initialState;
+
+export const makeSelect{{pluralizeHighFirstLetter modelName}} = () =>
+    createSelector(
+    select{{uppercaseFirstLetter modelName}}State,
+    {{modelName}}State => {{modelName}}State.{{pluralize modelName}}
+);
+export const makeSelect{{uppercaseFirstLetter modelName}}ById = id =>
+    createSelector(
+    select{{uppercaseFirstLetter modelName}}State,
+    {{modelName}}State => get{{uppercaseFirstLetter modelName}}({{modelName}}State.{{pluralize modelName}}, id)
+);
+
+export const makeSelectLoading = () =>
+    createSelector(
+    select{{uppercaseFirstLetter modelName}}State,
+    {{modelName}}State => {{modelName}}State.loading
+);
+
+export const makeSelectError = () =>
+    createSelector(
+    select{{uppercaseFirstLetter modelName}}State,
+    {{modelName}}State => {{modelName}}State.error
+);
+
+export const get{{uppercaseFirstLetter modelName}} = ({{pluralize modelName}}, id) => {
+    const index = findIndex({{pluralize modelName}}, {id: id});
+    return index !== -1 ? {{pluralize modelName}}[index] : null;
+};
+
+export default {
+    select{{uppercaseFirstLetter modelName}}State,
+    makeSelect{{pluralizeHighFirstLetter modelName}},
+    makeSelect{{uppercaseFirstLetter modelName}}ById,
+    makeSelectLoading,
+    makeSelectError,
+};

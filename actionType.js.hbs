@@ -1,0 +1,22 @@
+export default {
+    {{#if (shouldRender all get)}}
+    GET_{{pluralizeHigh modelName}}: 'GET_{{pluralizeHigh modelName}}',
+    GET_{{pluralizeHigh modelName}}_SUCCESS: 'GET_{{pluralizeHigh modelName}}_SUCCESS',
+    GET_{{pluralizeHigh modelName}}_ERROR: 'GET_{{pluralizeHigh modelName}}_ERROR',
+    {{/if}}
+    {{#if (shouldRender all post)}}
+    CREATE_{{uppercase modelName}}: 'CREATE_{{uppercase modelName}}',
+    CREATE_{{uppercase modelName}}_SUCCESS: 'CREATE_{{uppercase modelName}}_SUCCESS',
+    CREATE_{{uppercase modelName}}_ERROR: 'CREATE_{{uppercase modelName}}_ERROR',
+    {{/if}}
+    {{#if (shouldRender all put)}}
+    UPDATE_{{uppercase modelName}}: 'UPDATE_{{uppercase modelName}}',
+    UPDATE_{{uppercase modelName}}_SUCCESS: 'UPDATE_{{uppercase modelName}}_SUCCESS',
+    UPDATE_{{uppercase modelName}}_ERROR: 'UPDATE_{{uppercase modelName}}_ERROR',
+    {{/if}}
+    {{#if (shouldRender all delete)}}
+    DELETE_{{uppercase modelName}}: 'DELETE_{{uppercase modelName}}',
+    DELETE_{{uppercase modelName}}_SUCCESS: 'DELETE_{{uppercase modelName}}_SUCCESS',
+    DELETE_{{uppercase modelName}}_ERROR: 'DELETE_{{uppercase modelName}}_ERROR',
+    {{/if}}
+};
